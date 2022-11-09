@@ -10,6 +10,11 @@ config_file = 'config.conf'
 class ServerService(pb2_grpc.ServerServiceServicer):
     def __init__(self, *args, **kwargs):
         pass
+
+    def GetLeader(self, request, context):
+        print('Client getting leader')
+
+        return pb2.LeaderResponse(id=1, address='')
     
 def serve():
     server_id = sys.argv[1]
