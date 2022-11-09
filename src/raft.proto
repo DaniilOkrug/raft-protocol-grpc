@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+service ServerService {
+    rpc RequsetVote(RequsetVoteMessage) returns (SuccessResponse);
+
+    rpc AppendEntries(AppendEntriesMessage) returns (SuccessResponse);
+    
+    rpc GetLeader(EmptyMessage) returns (LeaderResponse);
+
+    rpc Suspend(SuspendMessage) returns (EmptyMessage);
+}
+
+message EmptyMessage {}
+
+message RequsetVoteMessage {
+    int32 term = 1;
+    int32 candidateId = 2;
+}
+
+message AppendEntriesMessage {
+    int32 term = 1;
+    int32 leaderId = 2;
+}
+
+message SuspendMessage {
+    int32 period = 1;
+}
+
+message SuccessResponse {
+    int32 term = 1;
+    bool success = 2;
+}
+
+message LeaderResponse {
+    int32 id = 1;
+    string address = 2;
+}
