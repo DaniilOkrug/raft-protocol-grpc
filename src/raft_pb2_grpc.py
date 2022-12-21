@@ -14,9 +14,9 @@ class ServerServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.RequsetVote = channel.unary_unary(
-                '/ServerService/RequsetVote',
-                request_serializer=raft__pb2.RequsetVoteMessage.SerializeToString,
+        self.RequestVote = channel.unary_unary(
+                '/ServerService/RequestVote',
+                request_serializer=raft__pb2.RequestVoteMessage.SerializeToString,
                 response_deserializer=raft__pb2.SuccessResponse.FromString,
                 )
         self.AppendEntries = channel.unary_unary(
@@ -34,12 +34,22 @@ class ServerServiceStub(object):
                 request_serializer=raft__pb2.SuspendMessage.SerializeToString,
                 response_deserializer=raft__pb2.EmptyMessage.FromString,
                 )
+        self.SetVal = channel.unary_unary(
+                '/ServerService/SetVal',
+                request_serializer=raft__pb2.SetKeyMessage.SerializeToString,
+                response_deserializer=raft__pb2.SetResponse.FromString,
+                )
+        self.GetVal = channel.unary_unary(
+                '/ServerService/GetVal',
+                request_serializer=raft__pb2.GetValMessage.SerializeToString,
+                response_deserializer=raft__pb2.GetResponse.FromString,
+                )
 
 
 class ServerServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def RequsetVote(self, request, context):
+    def RequestVote(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -63,12 +73,24 @@ class ServerServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SetVal(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetVal(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ServerServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'RequsetVote': grpc.unary_unary_rpc_method_handler(
-                    servicer.RequsetVote,
-                    request_deserializer=raft__pb2.RequsetVoteMessage.FromString,
+            'RequestVote': grpc.unary_unary_rpc_method_handler(
+                    servicer.RequestVote,
+                    request_deserializer=raft__pb2.RequestVoteMessage.FromString,
                     response_serializer=raft__pb2.SuccessResponse.SerializeToString,
             ),
             'AppendEntries': grpc.unary_unary_rpc_method_handler(
@@ -86,6 +108,16 @@ def add_ServerServiceServicer_to_server(servicer, server):
                     request_deserializer=raft__pb2.SuspendMessage.FromString,
                     response_serializer=raft__pb2.EmptyMessage.SerializeToString,
             ),
+            'SetVal': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetVal,
+                    request_deserializer=raft__pb2.SetKeyMessage.FromString,
+                    response_serializer=raft__pb2.SetResponse.SerializeToString,
+            ),
+            'GetVal': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetVal,
+                    request_deserializer=raft__pb2.GetValMessage.FromString,
+                    response_serializer=raft__pb2.GetResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'ServerService', rpc_method_handlers)
@@ -97,7 +129,7 @@ class ServerService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def RequsetVote(request,
+    def RequestVote(request,
             target,
             options=(),
             channel_credentials=None,
@@ -107,8 +139,8 @@ class ServerService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ServerService/RequsetVote',
-            raft__pb2.RequsetVoteMessage.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/ServerService/RequestVote',
+            raft__pb2.RequestVoteMessage.SerializeToString,
             raft__pb2.SuccessResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -161,5 +193,39 @@ class ServerService(object):
         return grpc.experimental.unary_unary(request, target, '/ServerService/Suspend',
             raft__pb2.SuspendMessage.SerializeToString,
             raft__pb2.EmptyMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetVal(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ServerService/SetVal',
+            raft__pb2.SetKeyMessage.SerializeToString,
+            raft__pb2.SetResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetVal(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ServerService/GetVal',
+            raft__pb2.GetValMessage.SerializeToString,
+            raft__pb2.GetResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nraft.proto\"\x0e\n\x0c\x45mptyMessage\"7\n\x12RequsetVoteMessage\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x13\n\x0b\x63\x61ndidateId\x18\x02 \x01(\x05\"6\n\x14\x41ppendEntriesMessage\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x10\n\x08leaderId\x18\x02 \x01(\x05\" \n\x0eSuspendMessage\x12\x0e\n\x06period\x18\x01 \x01(\x05\"0\n\x0fSuccessResponse\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x0f\n\x07success\x18\x02 \x01(\x08\"-\n\x0eLeaderResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07\x61\x64\x64ress\x18\x02 \x01(\t2\xd7\x01\n\rServerService\x12\x34\n\x0bRequsetVote\x12\x13.RequsetVoteMessage\x1a\x10.SuccessResponse\x12\x38\n\rAppendEntries\x12\x15.AppendEntriesMessage\x1a\x10.SuccessResponse\x12+\n\tGetLeader\x12\r.EmptyMessage\x1a\x0f.LeaderResponse\x12)\n\x07Suspend\x12\x0f.SuspendMessage\x1a\r.EmptyMessageb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nraft.proto\"\x0e\n\x0c\x45mptyMessage\"\x1d\n\x0eStringResponse\x12\x0b\n\x03msg\x18\x01 \x01(\t\"7\n\x12RequestVoteMessage\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x13\n\x0b\x63\x61ndidateId\x18\x02 \x01(\x05\"\x93\x01\n\x14\x41ppendEntriesMessage\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x10\n\x08leaderId\x18\x02 \x01(\x05\x12\x14\n\x0cprevLogIndex\x18\x03 \x01(\x05\x12\x13\n\x0bprevLogTerm\x18\x04 \x01(\x05\x12\x1a\n\x07\x65ntries\x18\x05 \x03(\x0b\x32\t.LogEntry\x12\x14\n\x0cleaderCommit\x18\x06 \x01(\x05\"I\n\x08LogEntry\x12\r\n\x05index\x18\x01 \x01(\x05\x12\x0c\n\x04term\x18\x02 \x01(\x05\x12 \n\x07\x63ommand\x18\x03 \x01(\x0b\x32\x0f.CommandMessage\"?\n\x0e\x43ommandMessage\x12\x11\n\toperation\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\" \n\x0eSuspendMessage\x12\x0e\n\x06period\x18\x01 \x01(\x05\"0\n\x0fSuccessResponse\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x0f\n\x07success\x18\x02 \x01(\x08\"-\n\x0eLeaderResponse\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0f\n\x07\x61\x64\x64ress\x18\x02 \x01(\t\"+\n\rSetKeyMessage\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t\"\x1c\n\rGetValMessage\x12\x0b\n\x03key\x18\x01 \x01(\t\"\x1e\n\x0bSetResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"-\n\x0bGetResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\r\n\x05value\x18\x02 \x01(\t2\xa7\x02\n\rServerService\x12\x34\n\x0bRequestVote\x12\x13.RequestVoteMessage\x1a\x10.SuccessResponse\x12\x38\n\rAppendEntries\x12\x15.AppendEntriesMessage\x1a\x10.SuccessResponse\x12+\n\tGetLeader\x12\r.EmptyMessage\x1a\x0f.LeaderResponse\x12)\n\x07Suspend\x12\x0f.SuspendMessage\x1a\r.EmptyMessage\x12&\n\x06SetVal\x12\x0e.SetKeyMessage\x1a\x0c.SetResponse\x12&\n\x06GetVal\x12\x0e.GetValMessage\x1a\x0c.GetResponseb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'raft_pb2', globals())
@@ -22,16 +22,30 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _EMPTYMESSAGE._serialized_start=14
   _EMPTYMESSAGE._serialized_end=28
-  _REQUSETVOTEMESSAGE._serialized_start=30
-  _REQUSETVOTEMESSAGE._serialized_end=85
-  _APPENDENTRIESMESSAGE._serialized_start=87
-  _APPENDENTRIESMESSAGE._serialized_end=141
-  _SUSPENDMESSAGE._serialized_start=143
-  _SUSPENDMESSAGE._serialized_end=175
-  _SUCCESSRESPONSE._serialized_start=177
-  _SUCCESSRESPONSE._serialized_end=225
-  _LEADERRESPONSE._serialized_start=227
-  _LEADERRESPONSE._serialized_end=272
-  _SERVERSERVICE._serialized_start=275
-  _SERVERSERVICE._serialized_end=490
+  _STRINGRESPONSE._serialized_start=30
+  _STRINGRESPONSE._serialized_end=59
+  _REQUESTVOTEMESSAGE._serialized_start=61
+  _REQUESTVOTEMESSAGE._serialized_end=116
+  _APPENDENTRIESMESSAGE._serialized_start=119
+  _APPENDENTRIESMESSAGE._serialized_end=266
+  _LOGENTRY._serialized_start=268
+  _LOGENTRY._serialized_end=341
+  _COMMANDMESSAGE._serialized_start=343
+  _COMMANDMESSAGE._serialized_end=406
+  _SUSPENDMESSAGE._serialized_start=408
+  _SUSPENDMESSAGE._serialized_end=440
+  _SUCCESSRESPONSE._serialized_start=442
+  _SUCCESSRESPONSE._serialized_end=490
+  _LEADERRESPONSE._serialized_start=492
+  _LEADERRESPONSE._serialized_end=537
+  _SETKEYMESSAGE._serialized_start=539
+  _SETKEYMESSAGE._serialized_end=582
+  _GETVALMESSAGE._serialized_start=584
+  _GETVALMESSAGE._serialized_end=612
+  _SETRESPONSE._serialized_start=614
+  _SETRESPONSE._serialized_end=644
+  _GETRESPONSE._serialized_start=646
+  _GETRESPONSE._serialized_end=691
+  _SERVERSERVICE._serialized_start=694
+  _SERVERSERVICE._serialized_end=989
 # @@protoc_insertion_point(module_scope)

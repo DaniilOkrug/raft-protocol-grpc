@@ -1,18 +1,26 @@
 syntax = "proto3";
 
 service ServerService {
-    rpc RequsetVote(RequsetVoteMessage) returns (SuccessResponse);
+    rpc RequestVote(RequestVoteMessage) returns (SuccessResponse);
 
     rpc AppendEntries(AppendEntriesMessage) returns (SuccessResponse);
     
     rpc GetLeader(EmptyMessage) returns (LeaderResponse);
 
     rpc Suspend(SuspendMessage) returns (EmptyMessage);
+
+    rpc SetVal(SetKeyMessage) returns (SetResponse);
+
+    rpc GetVal(GetValMessage) returns (GetResponse);
 }
 
 message EmptyMessage {}
 
-message RequsetVoteMessage {
+message StringResponse {
+    string msg = 1;
+}
+
+message RequestVoteMessage {
     int32 term = 1;
     int32 candidateId = 2;
 }
@@ -20,6 +28,22 @@ message RequsetVoteMessage {
 message AppendEntriesMessage {
     int32 term = 1;
     int32 leaderId = 2;
+    int32 prevLogIndex = 3;
+    int32 prevLogTerm = 4;
+    repeated LogEntry entries = 5;
+    int32 leaderCommit = 6;
+}
+
+message LogEntry {
+    int32 index = 1;
+    int32 term = 2;
+    CommandMessage command = 3;
+}
+
+message CommandMessage {
+    string operation = 1;
+    string key = 2;
+    string value = 3;
 }
 
 message SuspendMessage {
@@ -34,4 +58,22 @@ message SuccessResponse {
 message LeaderResponse {
     int32 id = 1;
     string address = 2;
+}
+
+message SetKeyMessage {
+    string key = 1;
+    string value = 2;
+}
+
+message GetValMessage {
+    string key = 1;
+}
+
+message SetResponse {
+    bool success = 1;
+}
+
+message GetResponse {
+    bool success = 1;
+    string value = 2;
 }
